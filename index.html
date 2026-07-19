@@ -68,14 +68,11 @@
                 overflow-x: hidden !important;
                 max-width: 100vw !important;
             }
-            /* Ограничиваем только обычные блоки, не затрагивая меню и плавающие элементы */
-            div:not(.fixed):not(.absolute) {
-                max-width: 100% !important;
-            }
             h1, h2, h3, p, span {
                 word-wrap: break-word !important;
                 overflow-wrap: break-word !important;
             }
+            [x-cloak] { display: none !important; }
         }
     </style>
 </head>
@@ -86,7 +83,7 @@
 
     <!-- ==================== HEADER ==================== -->
     <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <a href="#" class="flex items-center gap-3 shrink-0">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -121,47 +118,55 @@
                 </div>
             </div>
         </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div x-show="mobileMenuOpen" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-[9999] lg:hidden"
+        style="display: none;">
         
-        <!-- Мобильное меню -->
-        <div x-show="mobileMenuOpen" 
-             class="fixed inset-0 z-50 lg:hidden"
-             style="display: none;">
-            <div class="absolute inset-0 bg-black/60" @click="mobileMenuOpen = false"></div>
-            <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="translate-x-full"
-                 x-transition:enter-end="translate-x-0"
-                 x-transition:leave="transition ease-in duration-200"
-                 x-transition:leave-start="translate-x-0"
-                 x-transition:leave-end="translate-x-full">
+        <div class="absolute inset-0 bg-black/60" @click="mobileMenuOpen = false"></div>
+        
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl"
+            x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-200 transform"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full">
+            
+            <div class="p-6 h-full overflow-y-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <span class="font-serif text-lg text-gray-900">Меню</span>
+                    <button @click="mobileMenuOpen = false" class="p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
                 
-                <div class="p-6 h-full overflow-y-auto">
-                    <div class="flex justify-between items-center mb-8">
-                        <span class="font-serif text-lg text-gray-900">Меню</span>
-                        <button @click="mobileMenuOpen = false" class="p-2">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <div class="flex flex-col gap-1 mb-8">
-                        <a href="#services" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Услуги</a>
-                        <a href="#doctors" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Врачи</a>
-                        <a href="#about" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Налоговый вычет</a>
-                        <a href="#reviews" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Отзывы</a>
-                        <a href="#contacts" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Контакты</a>
-                    </div>
-                    
-                    <div class="pt-6 border-t border-gray-200">
-                        <a href="tel:+73433000000" class="block text-lg font-semibold text-gray-900 mb-1">+(343) 300-00-00</a>
-                        <div class="text-xs text-gray-600 mb-4">ПН-ПТ 9:00-21:00<br>СБ 9:00-16:00</div>
-                        <a href="#appointment" @click="mobileMenuOpen = false" class="block w-full bg-gray-900 text-white text-center py-3 rounded-full">Записаться</a>
-                    </div>
+                <nav class="flex flex-col gap-1 mb-8">
+                    <a href="#services" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Услуги</a>
+                    <a href="#doctors" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Врачи</a>
+                    <a href="#about" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Налоговый вычет</a>
+                    <a href="#reviews" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Отзывы</a>
+                    <a href="#contacts" @click="mobileMenuOpen = false" class="py-3 text-lg text-gray-900 border-b border-gray-100">Контакты</a>
+                </nav>
+                
+                <div class="pt-6 border-t border-gray-200">
+                    <a href="tel:+73433000000" class="block text-lg font-semibold text-gray-900 mb-1">+(343) 300-00-00</a>
+                    <div class="text-xs text-gray-600 mb-4">ПН-ПТ 9:00-21:00<br>СБ 9:00-16:00</div>
+                    <a href="#appointment" @click="mobileMenuOpen = false" class="block w-full bg-gray-900 text-white text-center py-3 rounded-full">Записаться</a>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
     <div class="h-16 md:h-20"></div>
 
@@ -228,7 +233,7 @@
 
     <!-- ==================== УСЛУГИ ==================== -->
     <section id="services" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-text-main mb-4">Стоматология для взрослых и детей</h2>
                 <p class="text-text-secondary max-w-2xl mx-auto">Стоимость и описание услуг</p>
