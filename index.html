@@ -54,29 +54,25 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* ЯДЕРНОЕ ОГРАНИЧЕНИЕ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ */
         @media (max-width: 768px) {
             body {
                 overflow-x: hidden !important;
             }
             .max-w-7xl {
                 max-width: 100% !important;
-                width: calc(100% - 32px) !important;
+                width: 100% !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
-                padding-left: 16px !important;
-                padding-right: 16px !important;
             }
             section, header, footer {
                 overflow-x: hidden !important;
                 max-width: 100vw !important;
             }
-            /* Запрет горизонтального скролла для всех элементов */
-            * {
+            /* Ограничиваем только обычные блоки, не затрагивая меню и плавающие элементы */
+            div:not(.fixed):not(.absolute) {
                 max-width: 100% !important;
             }
-            /* Разрешаем перенос текста */
-            h1, h2, h3, p, span, div {
+            h1, h2, h3, p, span {
                 word-wrap: break-word !important;
                 overflow-wrap: break-word !important;
             }
@@ -171,7 +167,7 @@
 
     <!-- ==================== HERO ==================== -->
     <section class="bg-bg-light">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-28" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-28" mobile-padding>
             <div class="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
                 <div class="lg:col-span-2">
                     <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-text-main leading-tight mb-10">
@@ -232,7 +228,7 @@
 
     <!-- ==================== УСЛУГИ ==================== -->
     <section id="services" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="text-center mb-12 md:mb-16">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-text-main mb-4">Стоматология для взрослых и детей</h2>
                 <p class="text-text-secondary max-w-2xl mx-auto">Стоимость и описание услуг</p>
@@ -423,7 +419,7 @@
 
     <!-- ==================== ПРЕИМУЩЕСТВА ==================== -->
     <section class="bg-bg-light py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="text-center mb-12">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-text-main mb-4">
                     15 лет заботимся<br class="md:hidden"> о вашем здоровье
@@ -502,7 +498,7 @@
 
     <!-- ==================== ВРАЧИ ==================== -->
     <section id="doctors" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="text-center mb-12">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-text-main mb-4">Врачи, которым доверяют</h2>
                 <p class="text-text-secondary max-w-2xl mx-auto">Высококвалифицированные специалисты с многолетним опытом</p>
@@ -605,7 +601,7 @@
 
     <!-- ==================== НАЛОГОВЫЙ ВЫЧЕТ ==================== -->
     <section id="about" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="bg-accent/5 border border-accent/20 rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16">
                 <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     <div>
@@ -665,7 +661,7 @@
 
     <!-- ==================== ОТЗЫВЫ ==================== -->
     <section id="reviews" class="bg-bg-light py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="text-center mb-12">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-text-main mb-4">Истории наших пациентов</h2>
                 <p class="text-text-secondary">Отзывы с 2ГИС и ПроДокторов</p>
@@ -784,7 +780,7 @@
 
     <!-- ==================== CTA-БЛОК ==================== -->
     <section id="appointment" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" mobile-padding>
             <div class="bg-text-main rounded-2xl p-6 sm:p-8 md:p-12 lg:p-16">
                 <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-8 leading-tight text-center">
                     Запишитесь на консультацию прямо сейчас
@@ -842,7 +838,7 @@
                     allowfullscreen 
                     class="absolute inset-0 pointer-events-auto"></iframe>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16" mobile-padding>
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-12 md:py-16" mobile-padding>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                 <div>
                     <h3 class="font-serif text-xl text-text-main mb-4">Контакты</h3>
